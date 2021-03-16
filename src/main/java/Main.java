@@ -50,7 +50,6 @@ public class Main {
 
                     break;
                 case 3:
-
                     break;
                 case 4:
 
@@ -59,7 +58,7 @@ public class Main {
 
                     break;
                 case 6:
-                    Student.toStringBehaaldeExamens();
+                    Student.overzichtBehaaldeExamens();
                     break;
                 case 7:
 

@@ -45,28 +45,33 @@ public class Student {
             return behaaldeExamens;
     }
 
-    public static void toStringBehaaldeExamens(){
+    public static void overzichtBehaaldeExamens(){
         System.out.println("Studentnummer: ");
         Scanner scn = new Scanner(System.in);
         Integer sNr = scn.nextInt();
 
         Student student = Student.getStudentByNr(sNr);
 
-        if(student.getBehaaldeExamens().size() == 0){
-            System.out.printf("%s heeft nog geen examens gehaald.\n", student.getVoorNaam() + " " + student.getAchterNaam());
-        }
-        else {
-            System.out.printf("%s heeft de volgende examens gehaald:\n", student.getVoorNaam() + " " + student.getAchterNaam());
-            for (String temp : student.getBehaaldeExamens()) {
-                System.out.println(temp);
+        if(student != null) {
+            if (student.getBehaaldeExamens().isEmpty()) {
+                System.out.printf("%s heeft nog geen examens gehaald.\n", student.getVoorNaam() + " " + student.getAchterNaam());
+            } else {
+                System.out.printf("%s heeft de volgende examens gehaald:\n", student.getVoorNaam() + " " + student.getAchterNaam());
+                for (String temp : student.getBehaaldeExamens()) {
+                    System.out.println(temp);
+                }
             }
+            Main.menu(0);
         }
-        Main.menu(1);
+        else{
+            System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
+            Student.overzichtBehaaldeExamens();
+        }
     }
 
     public static void studentAanmaken(String voorNaam, String achterNaam, Integer studentNr) {
         new Student(voorNaam, achterNaam, studentNr);
-        Main.menu(1);
+        Main.menu(0);
     }
 
     public static void studentVerwijderen(Integer studentNr) {
