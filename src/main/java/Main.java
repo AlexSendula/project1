@@ -6,19 +6,13 @@ public class Main {
         menu(0);
     }
 
-    public static void menu(int leegScherm) throws InvalidParameterException {
+    public static void menu(int leegScherm) {
         /**
          This is the menu interface of the program.
          1 = will flush screen before showing menu interface.
          0 = will directly show menu interface.
          @param Allows for 1 or 0 as input.
-
          **/
-
-        //Missing InvalidParameterException, please finish this.
-        if (leegScherm == 1 || leegScherm == 0) {
-            throw new InvalidParameterException();
-        }
 
         if (leegScherm == 1) {
             leegScherm();
