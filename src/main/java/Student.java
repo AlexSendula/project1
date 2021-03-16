@@ -65,7 +65,7 @@ public class Student {
         }
         else{
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
-            Student.overzichtBehaaldeExamens();
+            overzichtBehaaldeExamens();
         }
     }
 
