@@ -59,7 +59,7 @@ public class Main {
 
                     break;
                 case 6:
-
+                    Student.toStringBehaaldeExamens();
                     break;
                 case 7:
 
