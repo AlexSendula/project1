@@ -50,8 +50,10 @@ public class Main {
 
                     break;
                 case 3:
+                    Student.studentAanmaken();
                     break;
                 case 4:
+                    Student.studentVerwijderen();
 
                     break;
                 case 5:
