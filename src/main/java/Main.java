@@ -12,6 +12,7 @@ public class Main {
          1 = will flush screen before showing menu interface.
          0 = will directly show menu interface.
          @param Allows for 1 or 0 as input.
+
          **/
 
         //Missing InvalidParameterException, please finish this.
