@@ -12,17 +12,20 @@ public class Examen {
         this.naam = naam;
         this.quotering = quotering;
         this.examenLengte = examenLengte;
-
     }
+
     public String getNaam() {
         return naam;
     }
+
     public Double getQuotering() {
         return quotering;
     }
+
     public Integer getExamenLengte() {
         return examenLengte;
     }
+
     public ArrayList<Vraag> getVragenLijst() {
         return vragenLijst;
     }

@@ -1,5 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Student {
@@ -24,8 +26,20 @@ public class Student {
         return achterNaam;
     }
 
+    public String getNaam(){
+        return voorNaam + " " + achterNaam;
+    }
+
     public Integer getStudentNr() {
         return studentNr;
+    }
+
+    public ArrayList<String> getBehaaldeExamens() {
+            return behaaldeExamens;
+    }
+
+    public void setBehaaldeExamens(String examen){
+        this.behaaldeExamens.add(examen);
     }
 
     public static Student getStudentByNr(Integer sNr) {
@@ -41,32 +55,45 @@ public class Student {
         return null;
     }
 
-    public ArrayList<String> getBehaaldeExamens() {
-            return behaaldeExamens;
-    }
+    public static ArrayList<Student> topStudent(){
+        ArrayList<Student> topStudenten = new ArrayList<Student>();
+        Collections.sort(studentLijst, new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                int aantalExamens1 = s1.getBehaaldeExamens().size();
+                int aantalExamens2 = s2.getBehaaldeExamens().size();
 
-    public static void overzichtBehaaldeExamens(){
-        System.out.println("Studentnummer: ");
-        Scanner scn = new Scanner(System.in);
-        Integer sNr = scn.nextInt();
-
-        Student student = Student.getStudentByNr(sNr);
-
-        if(student != null) {
-            if (student.getBehaaldeExamens().isEmpty()) {
-                System.out.printf("%s heeft nog geen examens gehaald.\n", student.getVoorNaam() + " " + student.getAchterNaam());
-            } else {
-                System.out.printf("%s heeft de volgende examens gehaald:\n", student.getVoorNaam() + " " + student.getAchterNaam());
-                for (String temp : student.getBehaaldeExamens()) {
-                    System.out.println(temp);
-                }
+                return aantalExamens2-aantalExamens1;
             }
-            Main.menu(0);
+        });
+
+        if(studentLijst.isEmpty()) {
+            return null;
         }
-        else{
-            System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
-            overzichtBehaaldeExamens();
+
+        topStudenten.add(studentLijst.get(0));
+
+        int i = 1;
+        for (Student student : studentLijst.subList(1, studentLijst.size())) {
+            int studentBehaaldeExamens = student.getBehaaldeExamens().size();
+            int topStudentBehaaldeExamens = topStudenten.get(0).getBehaaldeExamens().size();
+
+            if(student.getBehaaldeExamens().isEmpty()){
+                i++;
+            }
+
+            if(studentBehaaldeExamens == topStudentBehaaldeExamens) {
+                topStudenten.add(student);
+            }
+            else if(studentBehaaldeExamens < topStudentBehaaldeExamens){
+                return topStudenten;
+            }
         }
+
+        if(i == studentLijst.size()){
+            return null;
+        }
+        return topStudenten;
     }
 
     public static void studentAanmaken() {
