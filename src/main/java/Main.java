@@ -1,9 +1,10 @@
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Main {
+    public static ArrayList<Student> studentLijst = new ArrayList<>();
+
     public static void main(String[] args) {
         Student test = new Student("Dylan", "van der Stam", 18094171);
         test.setBehaaldeExamens("Rekenen");
@@ -52,16 +53,18 @@ public class Main {
         if (menuKeuze >= 0 && menuKeuze <=7) {
             switch (menuKeuze) {
                 case 0:
-                    menu(1);
+                    sluitProgramma();
                     break;
                 case 1:
 
                     break;
                 case 2:
-
+                    toonStudenten();
+                    menu(0);
                     break;
                 case 3:
-                    Student.studentAanmaken();
+                    studentAanmaken();
+                    menu(0);
                     break;
                 case 4:
                     Student.studentVerwijderen();
@@ -82,6 +85,27 @@ public class Main {
         }
     }
 
+    public static void sluitProgramma() {
+        System.exit(0);
+    }
+
+    public static void toonStudenten() {
+        for (Student student : studentLijst) {
+            System.out.println(student.getNaam());
+        }
+    }
+
+    public static void studentAanmaken() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Voornaam, achternaam, studentnummer");
+            new Student(scanner.nextLine().split(", "));
+        } catch (Exception ignored) {
+            System.out.println("Ongeldige invoer, probeer het nogmaals.");
+            menu(0);
+        }
+    }
+
     public static void leegScherm() {
         for (int i = 0; i < 20; i++) {
             System.out.println("\n");
@@ -92,10 +116,6 @@ public class Main {
     public static void streepje(){
         Stream.generate(()->"-").limit(50).forEach(System.out::print);
         System.out.println();
-    }
-
-    public static void sluitProgramma() {
-        System.exit(0);
     }
 
     public static void overzichtBehaaldeExamens(){
@@ -122,8 +142,46 @@ public class Main {
         }
     }
 
+    public static ArrayList<Student> topStudent(){
+        ArrayList<Student> topStudenten = new ArrayList<>();
+        studentLijst.sort((s1, s2) -> {
+            int aantalExamens1 = s1.getBehaaldeExamens().size();
+            int aantalExamens2 = s2.getBehaaldeExamens().size();
+
+            return aantalExamens2 - aantalExamens1;
+        });
+
+        if(studentLijst.isEmpty()) {
+            return null;
+        }
+
+        topStudenten.add(studentLijst.get(0));
+
+        int i = 1;
+        for (Student student : studentLijst.subList(1, studentLijst.size())) {
+            int studentBehaaldeExamens = student.getBehaaldeExamens().size();
+            int topStudentBehaaldeExamens = topStudenten.get(0).getBehaaldeExamens().size();
+
+            if(student.getBehaaldeExamens().isEmpty()){
+                i++;
+            }
+
+            if(studentBehaaldeExamens == topStudentBehaaldeExamens) {
+                topStudenten.add(student);
+            }
+            else if(studentBehaaldeExamens < topStudentBehaaldeExamens){
+                return topStudenten;
+            }
+        }
+
+        if(i == studentLijst.size()){
+            return null;
+        }
+        return topStudenten;
+    }
+
     public static void getTopStudent(){
-        ArrayList<Student> topStudenten = Student.topStudent();
+        ArrayList<Student> topStudenten = topStudent();
         if(topStudenten != null) {
             leegScherm();
             streepje();
@@ -144,3 +202,32 @@ public class Main {
     }
 }
 
+
+//Alex
+//Sendula
+//1234578
+
+//Voornaam, Achternaam, Studentnummer
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678
+//Alex, Sendula, 12345678

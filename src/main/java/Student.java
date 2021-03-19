@@ -1,21 +1,34 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Student {
     private String voorNaam;
     private String achterNaam;
     private Integer studentNr;
-    private ArrayList<String> behaaldeExamens = new ArrayList<String>();
-    private static ArrayList<Student> studentLijst = new ArrayList<Student>(); //toevoeging studenten arraylist
+    private ArrayList<String> behaaldeExamens = new ArrayList<>();
+    private static ArrayList<Student> studentLijst = Main.studentLijst; //toevoeging studenten arraylist
 
     public Student(String voorNaam, String achterNaam, Integer studentNr) {
+        aap(String.valueOf(studentNr));
+
         this.voorNaam = voorNaam;
         this.achterNaam = achterNaam;
         this.studentNr = studentNr;
         studentLijst.add(this);
+    }
+
+    public Student(String[] input) {
+        aap(input[2]);
+
+        this.voorNaam = input[0];
+        this.achterNaam = input[1];
+        this.studentNr = Integer.parseInt(input[2]);
+        studentLijst.add(this);
+    }
+
+    public void aap(String banaan) {
+        if (banaan.length() != 8) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public String getVoorNaam() {
@@ -94,66 +107,6 @@ public class Student {
             return null;
         }
         return topStudenten;
-    }
-
-    public static void studentAanmaken() {
-        Scanner scanner = new Scanner(System.in);
-        String studentNr = "0";
-        String voorNaam = null;
-        String achterNaam = null;
-        boolean studentNrCorrect = false;
-        System.out.print("Geef uw voornaam: ");
-        while (voorNaam == null) {
-            voorNaam = scanner.nextLine();
-            if (voorNaam.isBlank()){
-                System.out.println("Voornaam mag niet leeg zijn");
-                System.out.print("Probeer het opnieuw: ");
-                voorNaam = null;
-            }
-        }
-        System.out.print("Geef uw achternaam: ");
-        while (achterNaam == null) {
-            achterNaam = scanner.nextLine();
-            if (achterNaam.isBlank()){
-                System.out.println("Achternaam mag niet leeg zijn");
-                System.out.print("Probeer het opnieuw: ");
-                achterNaam = null;
-            }
-        }
-        studentNrCorrect = false;
-        System.out.print("Geef uw studentennummer: ");
-        while (studentNrCorrect == false) {
-            studentNr = scanner.nextLine();
-            if (studentNr.matches("[0-9]+")) {
-                if (studentNr.length() <= 8 && studentNr.length()>0 && !studentNr.equals("0")) {
-
-                    if (!studentLijst.isEmpty()) {
-                        if (getStudentByNr(Integer.parseInt(studentNr)) == null) {
-                            studentNrCorrect = true;
-                        } else {
-                            System.out.println("Het studentennummer is al in gebruik");
-                            System.out.print("Probeer het opnieuw: ");
-                            studentNrCorrect = false;
-                        }
-                    } else {
-                        studentNrCorrect = true;
-                    }
-
-                } else {
-                    System.out.println("Het studentennummer mag maximaal 8 getallen bevatten");
-                    System.out.print("Probeer het opnieuw: ");
-                    studentNrCorrect = false;
-
-                }
-            } else {
-                System.out.println("Het studentennummer moet een getal zijn");
-                System.out.print("Probeer het opnieuw: ");
-                studentNrCorrect = false;
-
-            }
-        }
-            new Student(voorNaam, achterNaam, Integer.parseInt(studentNr));
-        Main.menu(0);
     }
 
     public static void studentVerwijderen() {
