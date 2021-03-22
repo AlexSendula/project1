@@ -51,27 +51,6 @@ public class School {
     }
 
     public static void getTopStudent(){
-        ArrayList<Student> topStudenten = topStudent();
-        if(topStudenten != null) {
-            Main.leegScherm();
-            Main.streepje();
-            System.out.println("De student(en) met de meest behaalde examens zijn:");
-            for (Student student : topStudenten) {
-                System.out.println(student.getNaam());
-            }
-            Main.streepje();
-            Main.menu(0);
-        }
-        else {
-            Main.leegScherm();
-            Main.streepje();
-            System.out.println("Niemand heeft een examen gehaald.");
-            Main.streepje();
-            Main.menu(0);
-        }
-    }
-
-    public static ArrayList<Student> topStudent(){
         ArrayList<Student> topStudenten = new ArrayList<>();
         studentLijst.sort((s1, s2) -> {
             int aantalExamens1 = s1.getBehaaldeExamens().size();
@@ -80,11 +59,9 @@ public class School {
             return aantalExamens2 - aantalExamens1;
         });
 
-        if(studentLijst.isEmpty()) {
-            return null;
+        if(!studentLijst.isEmpty()) {
+            topStudenten.add(studentLijst.get(0));
         }
-
-        topStudenten.add(studentLijst.get(0));
 
         int i = 1;
         for (Student student : studentLijst.subList(1, studentLijst.size())) {
@@ -99,14 +76,24 @@ public class School {
                 topStudenten.add(student);
             }
             else if(studentBehaaldeExamens < topStudentBehaaldeExamens){
-                return topStudenten;
+                Main.leegScherm();
+                Main.streepje();
+                System.out.println("De student(en) met de meest behaalde examens zijn:");
+                for (Student temp : topStudenten) {
+                    System.out.println(temp.getNaam());
+                }
+                Main.streepje();
+                Main.menu(0);
             }
         }
 
         if(i == studentLijst.size()){
-            return null;
+            Main.leegScherm();
+            Main.streepje();
+            System.out.println("Niemand heeft een examen gehaald.");
+            Main.streepje();
+            Main.menu(0);
         }
-        return topStudenten;
     }
 
     public static Student getStudentByNr(Integer sNr) {
