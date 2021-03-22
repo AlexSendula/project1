@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -57,7 +55,7 @@ public class Main {
 
                     break;
                 case 2:
-                    School.toonStudenten();
+                    School.getStudenten();
                     menu(0);
                     break;
                 case 3:
@@ -72,7 +70,7 @@ public class Main {
 
                     break;
                 case 6:
-                    School.overzichtBehaaldeExamens();
+                    School.getBehaaldeExamens();
                     break;
                 case 7:
                     School.getTopStudent();

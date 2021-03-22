@@ -39,7 +39,7 @@ public class School {
         Main.menu(0);
     }
 
-    public static void toonStudenten() {
+    public static void getStudenten() {
         Main.leegScherm();
         Main.streepje();
         System.out.println("Studentnummer  Naam");
@@ -122,7 +122,7 @@ public class School {
         return null;
     }
 
-    public static void overzichtBehaaldeExamens(){
+    public static void getBehaaldeExamens(){
         System.out.print("Studentnummer: ");
         Scanner scn = new Scanner(System.in);
         Integer sNr = scn.nextInt();
