@@ -10,10 +10,8 @@ public class Main {
         test.setBehaaldeExamens("Rekenen");
         test.setBehaaldeExamens("Rekenen");
         Student test2 = new Student("Alex", "Sendula", 12345678);
-        test2.setBehaaldeExamens("Rekenen");
-        test2.setBehaaldeExamens("Rekenen");
+
         Student test3 = new Student("Emre", "Cakici", 87654321);
-        test3.setBehaaldeExamens("Rekenen");
         test3.setBehaaldeExamens("Rekenen");
         menu(0);
     }

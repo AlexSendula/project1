@@ -123,11 +123,14 @@ public class School {
     }
 
     public static void overzichtBehaaldeExamens(){
-        System.out.println("Studentnummer: ");
+        System.out.print("Studentnummer: ");
         Scanner scn = new Scanner(System.in);
         Integer sNr = scn.nextInt();
 
         Student student = getStudentByNr(sNr);
+
+        Main.leegScherm();
+        Main.streepje();
 
         if(student != null) {
             if (student.getBehaaldeExamens().isEmpty()) {
@@ -138,11 +141,15 @@ public class School {
                     System.out.println(temp);
                 }
             }
+            Main.streepje();
             Main.menu(0);
         }
         else{
+            Main.leegScherm();
+            Main.streepje();
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
-            overzichtBehaaldeExamens();
+            Main.streepje();
+            Main.menu(0);
         }
     }
 }
