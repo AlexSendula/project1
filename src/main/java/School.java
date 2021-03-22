@@ -40,9 +40,14 @@ public class School {
     }
 
     public static void toonStudenten() {
+        Main.leegScherm();
+        Main.streepje();
+        System.out.println("Studentnummer  Naam");
         for (Student student : studentLijst) {
-            System.out.println();
+            System.out.println(student.getStudentNr() + "       " + student.getVoorNaam() + " " + student.getAchterNaam());
         }
+        Main.streepje();
+        Main.menu(0);
     }
 
     public static void getTopStudent(){

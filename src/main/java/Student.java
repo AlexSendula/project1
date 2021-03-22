@@ -13,7 +13,7 @@ public class Student {
         this.voorNaam = voorNaam;
         this.achterNaam = achterNaam;
         this.studentNr = studentNr;
-        studentLijst.add(this);
+        School.studentLijst.add(this);
     }
 
     public Student(String[] input) {
