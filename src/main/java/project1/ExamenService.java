@@ -1,3 +1,5 @@
+package project1;
+
 public class ExamenService {
 
     private static final Vraag[] vragenWiskunde = {new Vraag("zit een vraag  ?","antwoord"),

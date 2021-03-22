@@ -1,10 +1,12 @@
+package project1;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class School {
     public static ArrayList<Student> studentLijst = new ArrayList<>();
 
-    // Student methods
+    // project1.Student methods
     public static void studentAanmaken() {
         Scanner scanner = new Scanner(System.in);
         try {

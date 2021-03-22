@@ -1,3 +1,5 @@
+package project1;
+
 import java.util.*;
 
 public class Student {
@@ -22,7 +24,7 @@ public class Student {
         this.voorNaam = input[0];
         this.achterNaam = input[1];
         this.studentNr = Integer.parseInt(input[2]);
-        studentLijst.add(this);
+        School.studentLijst.add(this);
     }
 
     public void checkStudentNummerLengte(String studentNummer) {
