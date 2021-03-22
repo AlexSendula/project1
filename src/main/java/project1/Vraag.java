@@ -4,7 +4,7 @@ public class Vraag {
     private String vraag;
     private String antwoord;
 
-    public Vraag(String vraag, String antwoord){
+    public Vraag(String vraag, String antwoord) {
         this.vraag = vraag;
         this.antwoord = antwoord;
     }

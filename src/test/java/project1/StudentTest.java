@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
-
-    @Test
-    void checkStudentNummerLengteTest() {
-    }
-
     @Test
     void getVoorNaamTest() {
         Student test = new Student("Test", "Test", 18094171);
@@ -59,5 +54,10 @@ class StudentTest {
 
     @Test
     void setBehaaldeExamens() {
+        Student test = new Student("Test", "Test", 18094171);
+        Student test2 = new Student("Test2", "Test2", 12345678);
+        test.setBehaaldeExamens("Rekenen");
+        assertTrue(!test.getBehaaldeExamens().isEmpty());
+        assertTrue(test2.getBehaaldeExamens().isEmpty());
     }
 }

@@ -95,7 +95,7 @@ public class Main {
     }
 
     //deze functie maakt shi wahed lijn niffo hode
-    public static void streepje(){
+    public static void streepje() {
         Stream.generate(()->"-").limit(50).forEach(System.out::print);
         System.out.println();
     }

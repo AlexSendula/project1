@@ -10,7 +10,9 @@ public class Student {
     private static ArrayList<Student> studentLijst = Student.studentLijst; //toevoeging studenten arraylist
 
     public Student(String voorNaam, String achterNaam, Integer studentNr) {
-        checkStudentNummerLengte(String.valueOf(studentNr));
+        if (studentNr.toString().length() != 8) {
+            throw new IllegalArgumentException();
+        }
 
         this.voorNaam = voorNaam;
         this.achterNaam = achterNaam;
@@ -19,18 +21,14 @@ public class Student {
     }
 
     public Student(String[] input) {
-        checkStudentNummerLengte(input[2]);
+        if (input[2].length() != 8) {
+            throw new IllegalArgumentException();
+        }
 
         this.voorNaam = input[0];
         this.achterNaam = input[1];
         this.studentNr = Integer.parseInt(input[2]);
         School.studentLijst.add(this);
-    }
-
-    public void checkStudentNummerLengte(String studentNummer) {
-        if (studentNummer.length() != 8) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public String getVoorNaam() {
@@ -56,7 +54,4 @@ public class Student {
     public void setBehaaldeExamens(String examen){
         this.behaaldeExamens.add(examen);
     }
-
-
-
 }

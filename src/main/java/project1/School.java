@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class School {
     public static ArrayList<Student> studentLijst = new ArrayList<>();
 
-    // project1.Student methods
+    // School methods
     public static void studentAanmaken() {
         Scanner scanner = new Scanner(System.in);
         try {
@@ -52,7 +52,7 @@ public class School {
         Main.menu(0);
     }
 
-    public static void getTopStudent(){
+    public static void getTopStudent() {
         ArrayList<Student> topStudenten = new ArrayList<>();
         studentLijst.sort((s1, s2) -> {
             int aantalExamens1 = s1.getBehaaldeExamens().size();
@@ -76,8 +76,7 @@ public class School {
 
             if(studentBehaaldeExamens == topStudentBehaaldeExamens) {
                 topStudenten.add(student);
-            }
-            else if(studentBehaaldeExamens < topStudentBehaaldeExamens){
+            } else if(studentBehaaldeExamens < topStudentBehaaldeExamens) {
                 Main.leegScherm();
                 Main.streepje();
                 System.out.println("De student(en) met de meest behaalde examens zijn:");
@@ -89,7 +88,7 @@ public class School {
             }
         }
 
-        if(i == studentLijst.size()){
+        if(i == studentLijst.size()) {
             Main.leegScherm();
             Main.streepje();
             System.out.println("Niemand heeft een examen gehaald.");
@@ -111,7 +110,7 @@ public class School {
         return null;
     }
 
-    public static void getBehaaldeExamens(){
+    public static void getBehaaldeExamens() {
         System.out.print("Studentnummer: ");
         Scanner scn = new Scanner(System.in);
         Integer sNr = scn.nextInt();
@@ -132,8 +131,7 @@ public class School {
             }
             Main.streepje();
             Main.menu(0);
-        }
-        else{
+        } else {
             Main.leegScherm();
             Main.streepje();
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
