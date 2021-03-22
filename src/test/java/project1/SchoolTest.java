@@ -31,5 +31,6 @@ class SchoolTest {
 
     @Test
     void getBehaaldeExamensTest() {
+
     }
 }
