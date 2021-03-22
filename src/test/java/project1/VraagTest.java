@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class VraagTest {
 
     @Test
-    void getVraag() {
+    void getVraagTest() {
     }
 
     @Test
-    void getAntwoord() {
+    void getAntwoordTest() {
     }
 }

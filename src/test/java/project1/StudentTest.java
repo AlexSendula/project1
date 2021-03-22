@@ -7,27 +7,27 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentTest {
 
     @Test
-    void checkStudentNummerLengte() {
+    void checkStudentNummerLengteTest() {
     }
 
     @Test
-    void getVoorNaam() {
+    void getVoorNaamTest() {
     }
 
     @Test
-    void getAchterNaam() {
+    void getAchterNaamTest() {
     }
 
     @Test
-    void getNaam() {
+    void getNaamTest() {
     }
 
     @Test
-    void getStudentNr() {
+    void getStudentNrTest() {
     }
 
     @Test
-    void getBehaaldeExamens() {
+    void getBehaaldeExamensTest() {
     }
 
     @Test

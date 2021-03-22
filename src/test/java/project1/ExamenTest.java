@@ -7,18 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExamenTest {
 
     @Test
-    void getNaam() {
+    void getNaamTest() {
     }
 
     @Test
-    void getQuotering() {
+    void getQuoteringTest() {
     }
 
     @Test
-    void getExamenLengte() {
+    void getExamenLengteTest() {
     }
 
     @Test
-    void getVragenLijst() {
+    void getVragenLijstTest() {
     }
 }

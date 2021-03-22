@@ -1,5 +1,6 @@
 package project1;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,26 +8,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class SchoolTest {
 
     @Test
-    void studentAanmaken() {
+    void studentAanmakenTest() {
     }
 
     @Test
-    void studentVerwijderen() {
+    void studentVerwijderenTest() {
     }
 
     @Test
-    void getStudenten() {
+    void getStudentenTest() {
     }
 
     @Test
-    void getTopStudent() {
+    void getTopStudentTest() {
     }
 
     @Test
-    void getStudentByNr() {
+    void getStudentByNrTest() {
+        Student test = new Student("Dylan", "van der Stam", 18094171);
+        Assertions.assertTrue(School.getStudentByNr(18094171).equals(test));
     }
 
     @Test
-    void getBehaaldeExamens() {
+    void getBehaaldeExamensTest() {
     }
 }
