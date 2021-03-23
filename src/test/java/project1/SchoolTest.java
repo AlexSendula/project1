@@ -21,7 +21,15 @@ class SchoolTest {
 
     @Test
     void studentVerwijderenTest() {
+        Student test = new Student("Voornaam", "Achternaam", 12345678);
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("12345678".getBytes());
+        System.setIn(in);
+        School.studentVerwijderen();
 
+        assertThrows(NullPointerException.class, () -> School.studentLijst.contains(School.getStudentByNr(12345678)));
+
+        System.setIn(sysInBackup);
     }
 
     @Test

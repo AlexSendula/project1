@@ -20,24 +20,12 @@ public class School {
 
     public static void studentVerwijderen() {
         Scanner scanner = new Scanner(System.in);
-        String studentNr = null;
         System.out.println("Geef het studentennummer om te verwijderen");
-        while (studentNr == null) {
-            studentNr = scanner.nextLine();
-            if (studentNr.matches("[0-9]+")) {
-                if (studentNr.length() <= 8 && studentNr.length()>0 && !studentNr.equals("0")) {
-                    Integer studentNrInt = Integer.parseInt(studentNr);
-                    studentLijst.removeIf(e -> (e.getStudentNr() == studentNrInt));
-                } else {
-                    System.out.println("Het studentennummer mag maximaal 8 getallen bevatten");
-                    System.out.print("Probeer het opnieuw: ");
-                    studentNr = null;
-                }
-            } else {
-                System.out.println("Het studentennummer moet een getal zijn");
-                System.out.print("Probeer het opnieuw: ");
-                studentNr = null;
-            }
+        try {
+            Student student = getStudentByNr(scanner.nextInt());
+            studentLijst.remove(student);
+        } catch (Exception ignored) {
+            System.out.println("Ongeldige invoer, probeer het nogmaals.");
         }
     }
 
@@ -107,7 +95,7 @@ public class School {
         } catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        throw new NullPointerException();
     }
 
     public static void getExamens() {
@@ -121,16 +109,14 @@ public class School {
     }
 
     public static void getBehaaldeExamens() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Studentnummer: ");
-        Scanner scn = new Scanner(System.in);
-        Integer sNr = scn.nextInt();
+        try {
+            Student student = getStudentByNr(scanner.nextInt());
 
-        Student student = getStudentByNr(sNr);
+            Main.leegScherm();
+            Main.streepje();
 
-        Main.leegScherm();
-        Main.streepje();
-
-        if(student != null) {
             if (student.getBehaaldeExamens().isEmpty()) {
                 System.out.printf("%s heeft nog geen examens gehaald.\n", student.getVoorNaam() + " " + student.getAchterNaam());
             } else {
@@ -140,7 +126,7 @@ public class School {
                 }
             }
             Main.streepje();
-        } else {
+        } catch (Exception ignored) {
             Main.leegScherm();
             Main.streepje();
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");

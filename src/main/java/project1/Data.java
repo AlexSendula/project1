@@ -23,10 +23,6 @@ public class Data {
         Student emre = new Student("Alex", "Sendula", 12345678);
         Student alex = new Student("Emre", "Cakici", 87654321);
 
-        School.studentLijst.add(dylan);
-        School.studentLijst.add(emre);
-        School.studentLijst.add(alex);
-
         dylan.setBehaaldeExamens(School.examenLijst.get(0).getNaam());
         dylan.setBehaaldeExamens(School.examenLijst.get(1).getNaam());
         dylan.setBehaaldeExamens(School.examenLijst.get(2).getNaam());
