@@ -6,7 +6,8 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-        Data.initializeData();
+        //Data.initializeData(); het werkt nu via de file dus dit niet meer nodig.
+        School.leesResultaten(); //resultaten inlezen gebeurt hier
         menu(0);
     }
 
@@ -80,6 +81,7 @@ public class Main {
     }
 
     public static void sluitProgramma() {
+        School.slaResultatenOp(); //resultaten opslaan
         leegScherm();
         System.out.println("Doei");
         System.exit(0);

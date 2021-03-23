@@ -1,5 +1,9 @@
 package project1;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +53,7 @@ public class School {
             return aantalExamens2 - aantalExamens1;
         });
 
-        if(!studentLijst.isEmpty()) {
+        if (!studentLijst.isEmpty()) {
             topStudenten.add(studentLijst.get(0));
         }
 
@@ -58,13 +62,13 @@ public class School {
             int studentBehaaldeExamens = student.getBehaaldeExamens().size();
             int topStudentBehaaldeExamens = topStudenten.get(0).getBehaaldeExamens().size();
 
-            if(student.getBehaaldeExamens().isEmpty()){
+            if (student.getBehaaldeExamens().isEmpty()) {
                 i++;
             }
 
-            if(studentBehaaldeExamens == topStudentBehaaldeExamens) {
+            if (studentBehaaldeExamens == topStudentBehaaldeExamens) {
                 topStudenten.add(student);
-            } else if(studentBehaaldeExamens < topStudentBehaaldeExamens) {
+            } else if (studentBehaaldeExamens < topStudentBehaaldeExamens) {
                 Main.leegScherm();
                 Main.streepje();
                 System.out.println("De student(en) met de meest behaalde examens zijn:");
@@ -76,7 +80,7 @@ public class School {
             }
         }
 
-        if(i == studentLijst.size()) {
+        if (i == studentLijst.size()) {
             Main.leegScherm();
             Main.streepje();
             System.out.println("Niemand heeft een examen gehaald.");
@@ -133,4 +137,52 @@ public class School {
             Main.streepje();
         }
     }
+
+
+    //test voor naar file schrijven
+    public static void slaResultatenOp() {
+        try {
+            FileWriter writer = new FileWriter("resources/resultaten.txt");
+            String tekst = "";
+
+            for (Student student : studentLijst) {
+                tekst = tekst+student.getVoorNaam()+", "+student.getAchterNaam()+", "+student.getStudentNr();
+                for (String temp : student.getBehaaldeExamens()) {
+                    tekst = tekst+", "+temp;
+                }
+                tekst = tekst+"\n";
+
+            }
+            tekst = tekst.substring(0, tekst.length() - 1);
+            writer.write(tekst);
+            writer.close();
+            System.out.println("Successful");
+        } catch (IOException exception) {
+            System.out.println("error");
+            exception.printStackTrace();
+        }
+    }
+
+    public static void leesResultaten() { //bij het handmatig toevoegen in de tekstfile moet je geen enter achterlaten aan het einde
+        try {
+            File file = new File("resources/resultaten.txt");
+            Scanner scanner = new Scanner(file);
+            String gegevens = "";
+            int getal = 0;
+            while (scanner.hasNextLine()) {
+                gegevens = scanner.nextLine();
+                String[] input = gegevens.split(", ");
+                new Student(input[0], input[1], Integer.parseInt(input[2]));
+                for (int i = 3; i < input.length; i++) {
+                    studentLijst.get(getal).setBehaaldeExamens(input[i]);
+                }
+                getal++;
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
 }
