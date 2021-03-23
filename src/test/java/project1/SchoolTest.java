@@ -27,13 +27,13 @@ class SchoolTest {
 
     @Test
     void studentVerwijderenTest() {
-        Student test = new Student("Voornaam", "Achternaam", 12345678);
+        new Student("Voornaam", "Achternaam", 65432178);
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("12345678".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("65432178".getBytes());
         System.setIn(in);
         School.studentVerwijderen();
 
-        assertThrows(NullPointerException.class, () -> School.studentLijst.contains(School.getStudentByNr(12345678)));
+        assertThrows(NullPointerException.class, () -> School.studentLijst.contains(School.getStudentByNr(65432178)));
 
         System.setIn(sysInBackup);
     }
@@ -50,6 +50,7 @@ class SchoolTest {
         test2.setBehaaldeExamens("Rekenen");
         test2.setBehaaldeExamens("Engels");
 
+        PrintStream sysInBackup = System.out;
         ByteArrayOutputStream testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
         School.getTopStudent();
@@ -57,12 +58,14 @@ class SchoolTest {
         assertTrue(testOut.toString().contains("Voornaam2"));
         assertFalse(testOut.toString().contains("12345678"));
         assertFalse(testOut.toString().contains("Niemand"));
+
+        System.setOut(sysInBackup);
     }
 
     @Test
     void getStudentByNrTest() {
-        Student test = new Student("Voornaam", "Achternaam", 12345678);
-        assertEquals(School.getStudentByNr(12345678), test);
+        Student test = new Student("Voornaam", "Achternaam", 12378456);
+        assertEquals(School.getStudentByNr(12378456), test);
         assertThrows(NullPointerException.class, () -> School.getStudentByNr(87654321));
     }
 
