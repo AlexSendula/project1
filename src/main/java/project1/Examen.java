@@ -10,10 +10,11 @@ public class Examen {
     private Integer examenLengte;
     private ArrayList<Vraag> vragenLijst;
 
-    public Examen(String naam, Double quotering, Integer examenLengte, Vraag[] vraag){
+    public Examen(String naam, Double quotering, Integer examenLengte, ArrayList<Vraag> vragenLijst){
         this.naam = naam;
         this.quotering = quotering;
         this.examenLengte = examenLengte;
+        this.vragenLijst = vragenLijst;
     }
 
     public String getNaam() {

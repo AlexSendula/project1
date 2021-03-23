@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class School {
     public static ArrayList<Student> studentLijst = new ArrayList<>();
+    public static ArrayList<Examen> examenLijst = new ArrayList<>();
 
     // School methods
     public static void studentAanmaken() {
@@ -38,7 +39,6 @@ public class School {
                 studentNr = null;
             }
         }
-        Main.menu(0);
     }
 
     public static void getStudenten() {
@@ -110,6 +110,16 @@ public class School {
         return null;
     }
 
+    public static void getExamens() {
+        Main.leegScherm();
+        Main.streepje();
+        System.out.println("Alle beschikbare examens:");
+        for (Examen examen : examenLijst) {
+            System.out.println(examen.getNaam());
+        }
+        Main.streepje();
+    }
+
     public static void getBehaaldeExamens() {
         System.out.print("Studentnummer: ");
         Scanner scn = new Scanner(System.in);
@@ -130,13 +140,11 @@ public class School {
                 }
             }
             Main.streepje();
-            Main.menu(0);
         } else {
             Main.leegScherm();
             Main.streepje();
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
             Main.streepje();
-            Main.menu(0);
         }
     }
 }

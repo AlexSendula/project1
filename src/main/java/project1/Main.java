@@ -6,14 +6,7 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-        Student test = new Student("Dylan", "van der Stam", 18094171);
-        test.setBehaaldeExamens("Rekenen");
-        test.setBehaaldeExamens("Rekenen");
-        Student test2 = new Student("Alex", "Sendula", 12345678);
-        test2.setBehaaldeExamens("Rekenen");
-        test2.setBehaaldeExamens("Rekenen");
-        Student test3 = new Student("Emre", "Cakici", 87654321);
-        test3.setBehaaldeExamens("Rekenen");
+        Data.initializeData();
         menu(0);
     }
 
@@ -33,11 +26,11 @@ public class Main {
         System.out.println("1) Lijst met examens");
         System.out.println("2) Lijst met studenten");
         System.out.println("3) Nieuwe student inschrijven");
-        System.out.println("4) project1.Student verwijderen");
-        System.out.println("5) project1.Examen afnemen");
+        System.out.println("4) Student verwijderen");
+        System.out.println("5) Examen afnemen");
         System.out.println("6) Welke examens heeft student gehaald?");
         System.out.println("7) Welke student heeft de meeste examens gehaald?");
-        System.out.println("0) exit");
+        System.out.println("0) Exit");
 
         int menuKeuze = 0;
 
@@ -55,7 +48,8 @@ public class Main {
                     sluitProgramma();
                     break;
                 case 1:
-
+                    School.getExamens();
+                    menu(0);
                     break;
                 case 2:
                     School.getStudenten();
@@ -67,13 +61,14 @@ public class Main {
                     break;
                 case 4:
                     School.studentVerwijderen();
-
+                    menu(0);
                     break;
                 case 5:
 
                     break;
                 case 6:
                     School.getBehaaldeExamens();
+                    menu(0);
                     break;
                 case 7:
                     School.getTopStudent();
@@ -85,6 +80,8 @@ public class Main {
     }
 
     public static void sluitProgramma() {
+        leegScherm();
+        System.out.println("Doei");
         System.exit(0);
     }
 
@@ -99,10 +96,4 @@ public class Main {
         Stream.generate(()->"-").limit(50).forEach(System.out::print);
         System.out.println();
     }
-
-
-
-
-
-
 }
