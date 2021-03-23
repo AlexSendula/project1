@@ -76,7 +76,7 @@ public class School {
                     System.out.println(temp.getNaam());
                 }
                 Main.streepje();
-                Main.menu(0);
+
             }
         }
 

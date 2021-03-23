@@ -23,7 +23,6 @@ public class Main {
             leegScherm();
         }
 
-        System.out.println("\n");
         System.out.println("1) Lijst met examens");
         System.out.println("2) Lijst met studenten");
         System.out.println("3) Nieuwe student inschrijven");
