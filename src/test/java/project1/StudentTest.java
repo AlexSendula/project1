@@ -11,6 +11,10 @@ class StudentTest {
         Student test = new Student("Test", "Test", 18094171);
         assertEquals("Test", test.getVoorNaam());
         assertNotEquals("Steve", test.getVoorNaam());
+
+        Student student1 = new Student("Jan", "Kees", 11223344);
+        assertEquals("Jan",student1.getVoorNaam());
+        assertNotEquals("Kees", student1.getVoorNaam());
     }
 
     @Test
@@ -18,6 +22,10 @@ class StudentTest {
         Student test = new Student("Test", "Test", 18094171);
         assertEquals("Test", test.getAchterNaam());
         assertNotEquals("van der Test", test.getAchterNaam());
+
+        Student student1 = new Student("Jan", "Kees", 11223344);
+        assertEquals("Kees", student1.getAchterNaam());
+        assertNotEquals("Jan", student1.getAchterNaam());
     }
 
     @Test
@@ -25,6 +33,10 @@ class StudentTest {
         Student test = new Student("Test", "Test", 18094171);
         assertEquals("Test Test", test.getNaam());
         assertNotEquals("Test van der Test", test.getVoorNaam());
+
+        Student student1 = new Student("Jan", "Kees", 11223344);
+        assertEquals("Jan Kees",student1.getNaam());
+        assertNotEquals("Kees Jan", student1.getNaam());
     }
 
     @Test
@@ -32,6 +44,10 @@ class StudentTest {
         Student test = new Student("Test", "Test", 18094171);
         assertEquals(18094171, test.getStudentNr());
         assertNotEquals(12345678, test.getStudentNr());
+
+        Student student1 = new Student("Jan", "Kees", 11223344);
+        assertEquals(11223344,student1.getStudentNr());
+        assertNotEquals(11223345,student1.getStudentNr());
     }
 
     @Test
@@ -49,6 +65,15 @@ class StudentTest {
         TestArrayList2.add("Rekenen");
         TestArrayList2.add("Reqs");
         assertFalse(TestArrayList2.equals(test.getBehaaldeExamens()));
+
+        ArrayList<String> behaaldeExamensTest = new ArrayList<>();
+        Student student1 = new Student("Jan", "Kees", 11223344);
+        student1.setBehaaldeExamens("Rekenen");
+        behaaldeExamensTest.add("Rekenen");
+        assertEquals(behaaldeExamensTest,student1.getBehaaldeExamens());
+        behaaldeExamensTest.remove(0);
+        behaaldeExamensTest.add("Taaltoets");
+        assertNotEquals(behaaldeExamensTest,student1.getBehaaldeExamens());
     }
 
     @Test
