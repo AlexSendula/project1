@@ -16,7 +16,12 @@ public class School {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Voornaam, achternaam, studentnummer");
-            new Student(scanner.nextLine().split(", "));
+            String[] studentGegevens = scanner.nextLine().split(", ");
+            String studentNr = studentGegevens[2];
+            if (bestaatStudent(Integer.parseInt(studentNr)) != null){
+                throw new Exception();
+            }
+            new Student(studentGegevens[0], studentGegevens[1], Integer.parseInt(studentGegevens[2]));
         } catch (Exception ignored) {
             System.out.println("Ongeldige invoer, probeer het nogmaals.");
         }
@@ -101,6 +106,20 @@ public class School {
         }
         throw new NullPointerException();
     }
+
+    public static Student bestaatStudent(Integer sNr){ //deze wordt gebruikt bij aanmaken student
+        try {
+            for (Student student : studentLijst) {
+                if (student.getStudentNr().equals(sNr)) {
+                    return student;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
 
     public static void getExamens() {
         Main.leegScherm();
