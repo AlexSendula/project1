@@ -8,7 +8,7 @@ public class Examen {
     private String naam;
     private Double quotering;
     private Integer examenLengte;
-    private ArrayList<Vraag> vragenLijst;
+    public static ArrayList<Vraag> vragenLijst;
 
     public Examen(String naam, Double quotering, Integer examenLengte, ArrayList<Vraag> vragenLijst){
         this.naam = naam;
