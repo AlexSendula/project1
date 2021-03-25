@@ -1,6 +1,3 @@
-Dylan, van der Stam, 18094171, Examen0, Examen1, Examen2
-Alex, Sendula, 12345678, Examen0, Examen1, Examen2
-Emre, Cakici, 87654321
-Test, Achternaam, 22334455, Examen7, Examen4
-Test2, H, 11111111, Examen13
-Test3, test, 55555555
+Voornaam1, Achternaam1, 12345678, Examen0, Examen1, Examen2
+Voornaam2, Achternaam2, 22345678
+Voornaam3, Achternaam3, 32345678, Examen0, Examen1, Examen2

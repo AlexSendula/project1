@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.ByteBuffer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,6 +41,17 @@ class SchoolTest {
 
     @Test
     void getStudentenTest() {
+        new Student("Voornaam1", "Achternaam1", 12345678);
+        new Student("Voornaam2", "Achternaam2", 22345678);
+        new Student("Voornaam3", "Achternaam3", 32345678);
+
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        School.getStudenten();
+
+        assertTrue(output.toString().contains("12345678       Voornaam1 Achternaam1"));
+        assertTrue(output.toString().contains("22345678       Voornaam2 Achternaam2"));
+        assertTrue(output.toString().contains("32345678       Voornaam3 Achternaam3"));
     }
 
     @Test
@@ -71,6 +83,17 @@ class SchoolTest {
 
     @Test
     void getBehaaldeExamensTest() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
 
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream(ByteBuffer.allocate(4).putInt(12345678).array());
+        System.setIn(in);
+
+        School.getBehaaldeExamens();
+
+        assertTrue(output.toString().contains("Voornaam1 Achternaam1 heeft de volgende examens gehaald:"));
+
+        System.setIn(sysInBackup);
     }
 }

@@ -46,7 +46,6 @@ public class School {
             System.out.println(student.getStudentNr() + "       " + student.getVoorNaam() + " " + student.getAchterNaam());
         }
         Main.streepje();
-        Main.menu(0);
     }
 
     public static void getTopStudent() {
@@ -119,7 +118,6 @@ public class School {
         }
         return null;
     }
-
 
     public static void getExamens() {
         Main.leegScherm();
