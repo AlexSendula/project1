@@ -302,7 +302,7 @@ public class School {
         }
     }
 
-    //test voor naar file schrijven
+    //naar file schrijven
     public void slaResultatenOp() {
         try {
             FileWriter writer = new FileWriter("resources/resultaten.txt");
@@ -319,9 +319,9 @@ public class School {
             tekst = tekst.substring(0, tekst.length() - 1);
             writer.write(tekst);
             writer.close();
-            System.out.println("Successful");
+            //System.out.println("Successful");
         } catch (IOException exception) {
-            System.out.println("error");
+            //System.out.println("Error");
             exception.printStackTrace();
         }
     }
@@ -344,7 +344,7 @@ public class School {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            //System.out.println("Error");
             e.printStackTrace();
         }
     }
