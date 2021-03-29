@@ -12,7 +12,7 @@ public class School {
     public static ArrayList<Examen> examenLijst = new ArrayList<>();
 
     // School methods
-    public static void studentAanmaken() {
+    public void studentAanmaken() {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Voornaam, achternaam, studentnummer");
@@ -27,7 +27,7 @@ public class School {
         }
     }
 
-    public static void studentVerwijderen() {
+    public void studentVerwijderen() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Geef het studentennummer om te verwijderen");
         try {
@@ -38,7 +38,7 @@ public class School {
         }
     }
 
-    public static void getStudenten() {
+    public void getStudenten() {
         Main.leegScherm();
         Main.streepje();
         System.out.println("Studentnummer  Naam");
@@ -48,7 +48,7 @@ public class School {
         Main.streepje();
     }
 
-    public static void getTopStudent() {
+    public void getTopStudent() {
         ArrayList<Student> topStudenten = new ArrayList<>();
         studentLijst.sort((s1, s2) -> {
             int aantalExamens1 = s1.getBehaaldeExamens().size();
@@ -93,7 +93,7 @@ public class School {
         }
     }
 
-    public static Student getStudentByNr(Integer sNr) {
+    public Student getStudentByNr(Integer sNr) {
         try {
             for (Student student : studentLijst) {
                 if (student.getStudentNr().equals(sNr)) {
@@ -106,7 +106,7 @@ public class School {
         throw new NullPointerException();
     }
 
-    public static Student bestaatStudent(Integer sNr){ //deze wordt gebruikt bij aanmaken student
+    public Student bestaatStudent(Integer sNr){ //deze wordt gebruikt bij aanmaken student
         try {
             for (Student student : studentLijst) {
                 if (student.getStudentNr().equals(sNr)) {
@@ -119,7 +119,7 @@ public class School {
         return null;
     }
 
-    public static void getExamens() {
+    public void getExamens() {
         Main.leegScherm();
         Main.streepje();
         System.out.println("Alle beschikbare examens:");
@@ -129,7 +129,7 @@ public class School {
         Main.streepje();
     }
 
-    public static void getBehaaldeExamens() {
+    public void getBehaaldeExamens() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Studentnummer: ");
         try {
@@ -154,7 +154,6 @@ public class School {
             Main.streepje();
         }
     }
-
 
     //test voor naar file schrijven
     public static void slaResultatenOp() {

@@ -2,7 +2,7 @@ package project1;
 
 import java.util.ArrayList;
 
-public class Data {
+public class Data extends Main{
 
     public static void initializeData() {
         ArrayList<ArrayList<Vraag>> collectieVragenLijst = new ArrayList<>();

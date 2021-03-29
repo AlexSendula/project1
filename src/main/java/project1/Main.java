@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Main {
-
     public static void main(String[] args) {
         School.leesResultaten();
         Data.initializeData();
@@ -18,6 +17,8 @@ public class Main {
          0 = will directly show menu interface.
          @param Allows for 1 or 0 as input.
          **/
+
+        School school = new School();
 
         if (leegScherm == 1) {
             leegScherm();
@@ -48,30 +49,30 @@ public class Main {
                     sluitProgramma();
                     break;
                 case 1:
-                    School.getExamens();
+                    school.getExamens();
                     menu(0);
                     break;
                 case 2:
-                    School.getStudenten();
+                    school.getStudenten();
                     menu(0);
                     break;
                 case 3:
-                    School.studentAanmaken();
+                    school.studentAanmaken();
                     menu(0);
                     break;
                 case 4:
-                    School.studentVerwijderen();
+                    school.studentVerwijderen();
                     menu(0);
                     break;
                 case 5:
 
                     break;
                 case 6:
-                    School.getBehaaldeExamens();
+                    school.getBehaaldeExamens();
                     menu(0);
                     break;
                 case 7:
-                    School.getTopStudent();
+                    school.getTopStudent();
                     break;
             }
         } else {
