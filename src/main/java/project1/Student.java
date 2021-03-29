@@ -7,7 +7,6 @@ public class Student {
     private String achterNaam;
     private Integer studentNr;
     private ArrayList<String> behaaldeExamens = new ArrayList<>();
-    private static ArrayList<Student> studentLijst = Student.studentLijst; //toevoeging studenten arraylist
 
     public Student(String voorNaam, String achterNaam, Integer studentNr) {
         if (studentNr.toString().length() != 8) {
@@ -17,7 +16,6 @@ public class Student {
         this.voorNaam = voorNaam;
         this.achterNaam = achterNaam;
         this.studentNr = studentNr;
-        School.studentLijst.add(this);
     }
 
     public Student(String[] input) {
@@ -28,7 +26,6 @@ public class Student {
         this.voorNaam = input[0];
         this.achterNaam = input[1];
         this.studentNr = Integer.parseInt(input[2]);
-        School.studentLijst.add(this);
     }
 
     public String getVoorNaam() {

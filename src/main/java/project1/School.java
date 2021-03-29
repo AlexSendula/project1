@@ -8,10 +8,79 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class School {
-    public static ArrayList<Student> studentLijst = new ArrayList<>();
-    public static ArrayList<Examen> examenLijst = new ArrayList<>();
+    private ArrayList<Student> studentLijst = new ArrayList<>();
+    public ArrayList<Examen> examenLijst = new ArrayList<>();
 
     // School methods
+    public void menu(int leegScherm) {
+        /**
+         This is the menu interface of the program.
+         1 = will flush screen before showing menu interface.
+         0 = will directly show menu interface.
+         @param Allows for 1 or 0 as input.
+         **/
+
+        if (leegScherm == 1) {
+            Main.leegScherm();
+        }
+
+        System.out.println("1) Lijst met examens");
+        System.out.println("2) Lijst met studenten");
+        System.out.println("3) Nieuwe student inschrijven");
+        System.out.println("4) Student verwijderen");
+        System.out.println("5) Examen afnemen");
+        System.out.println("6) Welke examens heeft student gehaald?");
+        System.out.println("7) Welke student heeft de meeste examens gehaald?");
+        System.out.println("0) Exit");
+
+        int menuKeuze = 0;
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            menuKeuze = scanner.nextInt();
+        } catch (Exception ignored) {
+            menu(1);
+        }
+
+        //Voeg hier de methods toe aan de hand van outputlines hierboven.
+        if (menuKeuze >= 0 && menuKeuze <=7) {
+            switch (menuKeuze) {
+                case 0:
+                    Main.sluitProgramma(this);
+                    break;
+                case 1:
+                    this.getExamens();
+                    menu(0);
+                    break;
+                case 2:
+                    this.getStudenten();
+                    menu(0);
+                    break;
+                case 3:
+                    this.studentAanmaken();
+                    menu(0);
+                    break;
+                case 4:
+                    this.studentVerwijderen();
+                    menu(0);
+                    break;
+                case 5:
+
+                    break;
+                case 6:
+                    this.getBehaaldeExamens();
+                    menu(0);
+                    break;
+                case 7:
+                    this.getTopStudent();
+                    menu(0);
+                    break;
+            }
+        } else {
+            menu(1);
+        }
+    }
+
     public void studentAanmaken() {
         Scanner scanner = new Scanner(System.in);
         try {
@@ -21,7 +90,7 @@ public class School {
             if (bestaatStudent(Integer.parseInt(studentNr)) != null){
                 throw new Exception();
             }
-            new Student(studentGegevens[0], studentGegevens[1], Integer.parseInt(studentGegevens[2]));
+            studentLijst.add(new Student(studentGegevens));
         } catch (Exception ignored) {
             System.out.println("Ongeldige invoer, probeer het nogmaals.");
         }
@@ -89,7 +158,7 @@ public class School {
             Main.streepje();
             System.out.println("Niemand heeft een examen gehaald.");
             Main.streepje();
-            Main.menu(0);
+            menu(0);
         }
     }
 
@@ -156,7 +225,7 @@ public class School {
     }
 
     //test voor naar file schrijven
-    public static void slaResultatenOp() {
+    public void slaResultatenOp() {
         try {
             FileWriter writer = new FileWriter("resources/resultaten.txt");
             String tekst = "";
@@ -179,7 +248,7 @@ public class School {
         }
     }
 
-    public static void leesResultaten() { //bij het handmatig toevoegen in de tekstfile moet je geen enter achterlaten aan het einde
+    public void leesResultaten() { //bij het handmatig toevoegen in de tekstfile moet je geen enter achterlaten aan het einde
         try {
             File file = new File("resources/resultaten.txt");
             Scanner scanner = new Scanner(file);
@@ -188,7 +257,8 @@ public class School {
             while (scanner.hasNextLine()) {
                 gegevens = scanner.nextLine();
                 String[] input = gegevens.split(", ");
-                new Student(input[0], input[1], Integer.parseInt(input[2]));
+                studentLijst.add(new Student(input));
+
                 for (int i = 3; i < input.length; i++) {
                     studentLijst.get(getal).setBehaaldeExamens(input[i]);
                 }
