@@ -11,17 +11,9 @@ public class Main {
         school.menu(0);
     }
 
-    public static void sluitProgramma(School school) {
-        school.slaResultatenOp(); //resultaten opslaan
-        leegScherm();
+    public static void sluitProgramma() {
         System.out.println("Doei");
         System.exit(0);
-    }
-
-    public static void leegScherm() {
-        for (int i = 0; i < 20; i++) {
-            System.out.println("\n");
-        }
     }
 
     //deze functie maakt shi wahed lijn niffo hode

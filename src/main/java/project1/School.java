@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class School {
@@ -21,7 +22,7 @@ public class School {
          **/
 
         if (leegScherm == 1) {
-            Main.leegScherm();
+            leegScherm();
         }
 
         System.out.println("1) Lijst met examens");
@@ -46,7 +47,9 @@ public class School {
         if (menuKeuze >= 0 && menuKeuze <=7) {
             switch (menuKeuze) {
                 case 0:
-                    Main.sluitProgramma(this);
+                    leegScherm();
+                    this.slaResultatenOp();
+                    Main.sluitProgramma();
                     break;
                 case 1:
                     this.getExamens();
@@ -65,7 +68,8 @@ public class School {
                     menu(0);
                     break;
                 case 5:
-
+                    this.examenAfnemen();
+                    menu(0);
                     break;
                 case 6:
                     this.getBehaaldeExamens();
@@ -81,6 +85,7 @@ public class School {
         }
     }
 
+    // Studenten
     public void studentAanmaken() {
         Scanner scanner = new Scanner(System.in);
         try {
@@ -108,7 +113,7 @@ public class School {
     }
 
     public void getStudenten() {
-        Main.leegScherm();
+        leegScherm();
         Main.streepje();
         System.out.println("Studentnummer  Naam");
         for (Student student : studentLijst) {
@@ -142,7 +147,7 @@ public class School {
             if (studentBehaaldeExamens == topStudentBehaaldeExamens) {
                 topStudenten.add(student);
             } else if (studentBehaaldeExamens < topStudentBehaaldeExamens) {
-                Main.leegScherm();
+                leegScherm();
                 Main.streepje();
                 System.out.println("De student(en) met de meest behaalde examens zijn:");
                 for (Student temp : topStudenten) {
@@ -154,7 +159,7 @@ public class School {
         }
 
         if (i == studentLijst.size()) {
-            Main.leegScherm();
+            leegScherm();
             Main.streepje();
             System.out.println("Niemand heeft een examen gehaald.");
             Main.streepje();
@@ -188,23 +193,13 @@ public class School {
         return null;
     }
 
-    public void getExamens() {
-        Main.leegScherm();
-        Main.streepje();
-        System.out.println("Alle beschikbare examens:");
-        for (Examen examen : examenLijst) {
-            System.out.println(examen.getNaam());
-        }
-        Main.streepje();
-    }
-
     public void getBehaaldeExamens() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Studentnummer: ");
         try {
             Student student = getStudentByNr(scanner.nextInt());
 
-            Main.leegScherm();
+            leegScherm();
             Main.streepje();
 
             if (student.getBehaaldeExamens().isEmpty()) {
@@ -217,10 +212,93 @@ public class School {
             }
             Main.streepje();
         } catch (Exception ignored) {
-            Main.leegScherm();
+            leegScherm();
             Main.streepje();
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
             Main.streepje();
+        }
+    }
+
+    // Examens
+    public void getExamens() {
+        leegScherm();
+        Main.streepje();
+        System.out.println("Alle beschikbare examens:");
+        for (Examen examen : examenLijst) {
+            System.out.println(examen.getNaam());
+        }
+        Main.streepje();
+    }
+
+    public Examen getExamenBijNaam(String naam) throws Exception {
+        for (Examen examen : examenLijst) {
+            if (examen.getNaam().equals(naam)) {
+                return examen;
+            }
+        }
+        throw new Exception();
+    }
+
+    public void examenAfnemen() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Wat is je studentnummer?");
+        String studentnummer = scanner.nextLine();
+        Student student = null;
+        try {
+            student = getStudentByNr(Integer.parseInt(studentnummer));
+        } catch (Exception ignored) {
+            leegScherm();
+            System.out.println("Ongeldige invoer, probeer nogmaals.");
+            menu(0);
+        }
+
+        System.out.println("Kies een examen");
+        for (Examen examen : examenLijst) {
+            System.out.println(examen.getNaam());
+        }
+
+        try {
+            Examen examen = getExamenBijNaam(scanner.nextLine());
+
+            ArrayList<Vraag> vragenlijst = examen.getVragenLijst();
+            Collections.shuffle(vragenlijst);
+
+            int aantalCorrect = 0;
+            leegScherm();
+
+            for (int i = 0; i < examen.getExamenLengte(); i++) {
+                Vraag vraag = examen.getVragenLijst().get(i);
+
+                System.out.println("Vraag:");
+                System.out.println(vraag.getVraag());
+                System.out.println("Antwoord:");
+                String input = scanner.nextLine();
+                if (input.equals(vraag.getAntwoord())) {
+                    leegScherm();
+                    System.out.println("Correct!\n");
+                    aantalCorrect++;
+                } else {
+                    leegScherm();
+                    System.out.printf("Fout! \nVraag: %s\njouw antwoord: %s, het correcte antwoord: %s\n\n",vraag.getVraag(), input, vraag.getAntwoord());
+                }
+            }
+
+            leegScherm();
+            double score = (100.0 / examen.getExamenLengte() * aantalCorrect);
+            if (score >= examen.getQuotering()) {
+                student.addBehaaldeExamens(examen.getNaam());
+                System.out.println("Gefeliciteerd, je hebt de examen gehaald!");
+            }
+        } catch (Exception ignored) {
+            leegScherm();
+            System.out.println("Ongeldige invoer, probeer opnieuw.");
+        }
+    }
+
+    public static void leegScherm() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println("\n");
         }
     }
 
@@ -260,7 +338,7 @@ public class School {
                 studentLijst.add(new Student(input));
 
                 for (int i = 3; i < input.length; i++) {
-                    studentLijst.get(getal).setBehaaldeExamens(input[i]);
+                    studentLijst.get(getal).addBehaaldeExamens(input[i]);
                 }
                 getal++;
             }

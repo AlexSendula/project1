@@ -53,8 +53,8 @@ class StudentTest {
     @Test
     void getBehaaldeExamensTest() {
         Student test = new Student("Test", "Test", 18094171);
-        test.setBehaaldeExamens("Rekenen");
-        test.setBehaaldeExamens("Engels");
+        test.addBehaaldeExamens("Rekenen");
+        test.addBehaaldeExamens("Engels");
 
         ArrayList<String> TestArrayList = new ArrayList<>();
         TestArrayList.add("Rekenen");
@@ -68,7 +68,7 @@ class StudentTest {
 
         ArrayList<String> behaaldeExamensTest = new ArrayList<>();
         Student student1 = new Student("Jan", "Kees", 11223344);
-        student1.setBehaaldeExamens("Rekenen");
+        student1.addBehaaldeExamens("Rekenen");
         behaaldeExamensTest.add("Rekenen");
         assertEquals(behaaldeExamensTest,student1.getBehaaldeExamens());
         behaaldeExamensTest.remove(0);
@@ -80,7 +80,7 @@ class StudentTest {
     void setBehaaldeExamens() {
         Student test = new Student("Test", "Test", 18094171);
         Student test2 = new Student("Test2", "Test2", 12345678);
-        test.setBehaaldeExamens("Rekenen");
+        test.addBehaaldeExamens("Rekenen");
         assertTrue(!test.getBehaaldeExamens().isEmpty());
         assertTrue(test2.getBehaaldeExamens().isEmpty());
     }

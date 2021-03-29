@@ -48,7 +48,7 @@ public class Student {
             return behaaldeExamens;
     }
 
-    public void setBehaaldeExamens(String examen){
+    public void addBehaaldeExamens(String examen){
         this.behaaldeExamens.add(examen);
     }
 }

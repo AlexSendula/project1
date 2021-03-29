@@ -15,7 +15,7 @@ public class Data {
             for (int i = 0; i < 10; i++) {
                 vragenLijst.add(new Vraag("Q"+index+"."+i, "A"+index+"."+i));
             }
-            school.examenLijst.add(new Examen("Examen"+index,55.0,10, collectieVragenLijst.get(index)));
+            school.examenLijst.add(new Examen("Examen"+index,60.0,5, collectieVragenLijst.get(index)));
             index++;
         }
     }
