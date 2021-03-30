@@ -11,78 +11,12 @@ import java.util.Scanner;
 public class School {
     private ArrayList<Student> studentLijst = new ArrayList<>();
     public ArrayList<Examen> examenLijst = new ArrayList<>();
+    private Menu menu;
 
-    // School methods
-    public void menu(int leegScherm) {
-        /**
-         This is the menu interface of the program.
-         1 = will flush screen before showing menu interface.
-         0 = will directly show menu interface.
-         @param Allows for 1 or 0 as input.
-         **/
-
-        if (leegScherm == 1) {
-            leegScherm();
-        }
-
-        System.out.println("1) Lijst met examens");
-        System.out.println("2) Lijst met studenten");
-        System.out.println("3) Nieuwe student inschrijven");
-        System.out.println("4) Student verwijderen");
-        System.out.println("5) Examen afnemen");
-        System.out.println("6) Welke examens heeft student gehaald?");
-        System.out.println("7) Welke student heeft de meeste examens gehaald?");
-        System.out.println("0) Exit");
-
-        int menuKeuze = 0;
-
-        try {
-            Scanner scanner = new Scanner(System.in);
-            menuKeuze = scanner.nextInt();
-        } catch (Exception ignored) {
-            menu(1);
-        }
-
-        //Voeg hier de methods toe aan de hand van outputlines hierboven.
-        if (menuKeuze >= 0 && menuKeuze <=7) {
-            switch (menuKeuze) {
-                case 0:
-                    leegScherm();
-                    this.slaResultatenOp();
-                    Main.sluitProgramma();
-                    break;
-                case 1:
-                    this.getExamens();
-                    menu(0);
-                    break;
-                case 2:
-                    this.getStudenten();
-                    menu(0);
-                    break;
-                case 3:
-                    this.studentAanmaken();
-                    menu(0);
-                    break;
-                case 4:
-                    this.studentVerwijderen();
-                    menu(0);
-                    break;
-                case 5:
-                    this.examenAfnemen();
-                    menu(0);
-                    break;
-                case 6:
-                    this.getBehaaldeExamens();
-                    menu(0);
-                    break;
-                case 7:
-                    this.getTopStudent();
-                    menu(0);
-                    break;
-            }
-        } else {
-            menu(1);
-        }
+    public School(Menu menu) {
+        this.menu = menu;
+        this.leesResultaten();
+        Data.initializeData(this);
     }
 
     // Studenten
@@ -113,13 +47,17 @@ public class School {
     }
 
     public void getStudenten() {
-        leegScherm();
+        menu.leegScherm();
         Main.streepje();
         System.out.println("Studentnummer  Naam");
         for (Student student : studentLijst) {
             System.out.println(student.getStudentNr() + "       " + student.getVoorNaam() + " " + student.getAchterNaam());
         }
         Main.streepje();
+    }
+
+    public ArrayList<Student> getStudentLijst() {
+        return studentLijst;
     }
 
     public void getTopStudent() {
@@ -147,7 +85,7 @@ public class School {
             if (studentBehaaldeExamens == topStudentBehaaldeExamens) {
                 topStudenten.add(student);
             } else if (studentBehaaldeExamens < topStudentBehaaldeExamens) {
-                leegScherm();
+                menu.leegScherm();
                 Main.streepje();
                 System.out.println("De student(en) met de meest behaalde examens zijn:");
                 for (Student temp : topStudenten) {
@@ -159,11 +97,11 @@ public class School {
         }
 
         if (i == studentLijst.size()) {
-            leegScherm();
+            menu.leegScherm();
             Main.streepje();
             System.out.println("Niemand heeft een examen gehaald.");
             Main.streepje();
-            menu(0);
+            menu.menu(0);
         }
     }
 
@@ -199,7 +137,7 @@ public class School {
         try {
             Student student = getStudentByNr(scanner.nextInt());
 
-            leegScherm();
+            menu.leegScherm();
             Main.streepje();
 
             if (student.getBehaaldeExamens().isEmpty()) {
@@ -212,7 +150,7 @@ public class School {
             }
             Main.streepje();
         } catch (Exception ignored) {
-            leegScherm();
+            menu.leegScherm();
             Main.streepje();
             System.out.println("StudentNr bestaat niet. Probeer het opnieuw.");
             Main.streepje();
@@ -221,7 +159,7 @@ public class School {
 
     // Examens
     public void getExamens() {
-        leegScherm();
+        menu.leegScherm();
         Main.streepje();
         System.out.println("Alle beschikbare examens:");
         for (Examen examen : examenLijst) {
@@ -248,9 +186,9 @@ public class School {
         try {
             student = getStudentByNr(Integer.parseInt(studentnummer));
         } catch (Exception ignored) {
-            leegScherm();
+            menu.leegScherm();
             System.out.println("Ongeldige invoer, probeer nogmaals.");
-            menu(0);
+            menu.menu(0);
         }
 
         System.out.println("Kies een examen");
@@ -265,7 +203,7 @@ public class School {
             Collections.shuffle(vragenlijst);
 
             int aantalCorrect = 0;
-            leegScherm();
+            menu.leegScherm();
 
             for (int i = 0; i < examen.getExamenLengte(); i++) {
                 Vraag vraag = examen.getVragenLijst().get(i);
@@ -275,30 +213,24 @@ public class School {
                 System.out.println("Antwoord:");
                 String input = scanner.nextLine();
                 if (input.equals(vraag.getAntwoord())) {
-                    leegScherm();
+                    menu.leegScherm();
                     System.out.println("Correct!\n");
                     aantalCorrect++;
                 } else {
-                    leegScherm();
+                    menu.leegScherm();
                     System.out.printf("Fout! \nVraag: %s\njouw antwoord: %s, het correcte antwoord: %s\n\n",vraag.getVraag(), input, vraag.getAntwoord());
                 }
             }
 
-            leegScherm();
+            menu.leegScherm();
             double score = (100.0 / examen.getExamenLengte() * aantalCorrect);
             if (score >= examen.getQuotering()) {
                 student.addBehaaldeExamens(examen.getNaam());
                 System.out.println("Gefeliciteerd, je hebt de examen gehaald!");
             }
         } catch (Exception ignored) {
-            leegScherm();
+            menu.leegScherm();
             System.out.println("Ongeldige invoer, probeer opnieuw.");
-        }
-    }
-
-    public static void leegScherm() {
-        for (int i = 0; i < 20; i++) {
-            System.out.println("\n");
         }
     }
 

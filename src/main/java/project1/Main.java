@@ -5,10 +5,7 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        School school = new School();
-        school.leesResultaten();
-        Data.initializeData(school);
-        school.menu(0);
+        new Menu();
     }
 
     public static void sluitProgramma() {
