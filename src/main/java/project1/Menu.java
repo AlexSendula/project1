@@ -7,7 +7,7 @@ public class Menu {
 
     public Menu() {
         school = new School(this);
-        menu(0);
+//        menu(0);
     }
 
     public void menu(int leegScherm) {

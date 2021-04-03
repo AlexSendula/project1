@@ -198,39 +198,17 @@ public class School {
 
         try {
             Examen examen = getExamenBijNaam(scanner.nextLine());
-
-            ArrayList<Vraag> vragenlijst = examen.getVragenLijst();
-            Collections.shuffle(vragenlijst);
-
-            int aantalCorrect = 0;
             menu.leegScherm();
 
-            for (int i = 0; i < examen.getExamenLengte(); i++) {
-                Vraag vraag = examen.getVragenLijst().get(i);
-
-                System.out.println("Vraag:");
-                System.out.println(vraag.getVraag());
-                System.out.println("Antwoord:");
-                String input = scanner.nextLine();
-                if (input.equals(vraag.getAntwoord())) {
-                    menu.leegScherm();
-                    System.out.println("Correct!\n");
-                    aantalCorrect++;
-                } else {
-                    menu.leegScherm();
-                    System.out.printf("Fout! \nVraag: %s\njouw antwoord: %s, het correcte antwoord: %s\n\n",vraag.getVraag(), input, vraag.getAntwoord());
-                }
-            }
-
-            menu.leegScherm();
-            double score = (100.0 / examen.getExamenLengte() * aantalCorrect);
-            if (score >= examen.getQuotering()) {
+            if (examen.loopVragenlijst()) {
                 student.addBehaaldeExamens(examen.getNaam());
                 System.out.println("Gefeliciteerd, je hebt de examen gehaald!");
+            } else {
+                menu.leegScherm();
+                System.out.println("Je hebt het examen niet gehaald, probeer het opnieuw.\n");
             }
         } catch (Exception ignored) {
-            menu.leegScherm();
-            System.out.println("Ongeldige invoer, probeer opnieuw.");
+
         }
     }
 
